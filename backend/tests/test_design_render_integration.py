@@ -130,7 +130,7 @@ def _examples() -> dict[str, bytes]:
         ],
     }
 
-    index = json.loads((EXAMPLES / "SemanticIndexA2.example.json").read_text())
+    index = json.loads((EXAMPLES / "SemanticIndexA3.example.json").read_text())
     index.update(
         components=[
             {
@@ -186,7 +186,7 @@ def _examples() -> dict[str, bytes]:
     overrides = {
         "PlacementsA1": placements,
         "BoardObjectsA0": board_objects,
-        "SemanticIndexA2": index,
+        "SemanticIndexA3": index,
     }
     files: dict[str, bytes] = {}
     for source in EXAMPLES.glob("*.example.json"):
