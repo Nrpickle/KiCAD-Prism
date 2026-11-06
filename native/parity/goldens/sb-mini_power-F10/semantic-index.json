@@ -1,6 +1,6 @@
 {
- "schema": "prism.semantic_index.a1",
- "sourceRevisionKey": "742b49094ed5daf849f222e1764989b9ccb95e1333e6c42e90e283cbea36daf3",
+ "schema": "prism.semantic_index.a3",
+ "designKey": "742b49094ed5daf849f222e1764989b9ccb95e1333e6c42e90e283cbea36daf3",
  "components": [
   {
    "componentUid": "cmp:bc87e698c5fb1511cef2",

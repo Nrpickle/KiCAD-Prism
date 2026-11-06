@@ -1,4 +1,4 @@
-//! `projections/semantic-index.json` (`prism.semantic_index.a2`), WP-P1.
+//! `projections/semantic-index.json` (`prism.semantic_index.a3`), WP-P1.
 //!
 //! A port of today's `backend/app/services/semantic_index_service.py`
 //! (`build_semantic_index`), `semantic_index_nets.py`,
@@ -32,16 +32,16 @@ mod state;
 
 use crate::{Produced, ProjectionError, ProjectionInput, document};
 pub(crate) use assembly::default_components;
-use prism_kicad_contracts::generated::prism_semantic_index_a2::SemanticIndexA2;
+use prism_kicad_contracts::generated::prism_semantic_index_a3::SemanticIndexA3;
 use serde_json::Value;
 pub(crate) use state::{Placement, Placements, State, stable_uid, string};
 
 /// The member's schema id.
-pub const SCHEMA: &str = "prism.semantic_index.a2";
+pub const SCHEMA: &str = "prism.semantic_index.a3";
 const NAME: &str = "projections/semantic-index.json";
 
 /// Build `projections/semantic-index.json` from the single parse of the revision.
-pub fn produce(input: &ProjectionInput<'_>) -> Result<Produced<SemanticIndexA2>, ProjectionError> {
+pub fn produce(input: &ProjectionInput<'_>) -> Result<Produced<SemanticIndexA3>, ProjectionError> {
     let (Some(schematic), Some(design)) = (input.schematic, input.design) else {
         if input.config.root_schematic.is_some() {
             return Err(ProjectionError::new(format!(

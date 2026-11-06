@@ -1,6 +1,6 @@
-# Field map: projections/semantic-index.json (`prism.semantic_index.a2`)
+# Field map: projections/semantic-index.json (`prism.semantic_index.a3`)
 
-Root model `SemanticIndexA2` in `tsp/prism/semantic-index-a2.tsp`. Example `examples/SemanticIndexA2.example.json`. a2 is a1 with `designKey` in place of `sourceRevisionKey` (ADR amendment K2 §3.6); every other field is unchanged.
+Root model `SemanticIndexA3` in `src/tsp/prism/semantic-index-a3.tsp`. Example `examples/SemanticIndexA3.example.json`. a3 admits the existing renderer fallback in the two pin identity fields (ADR amendment P1); a2 stays registered for stored bundles. a2 is a1 with `designKey` in place of `sourceRevisionKey` (ADR amendment K2 §3.6); every other field is unchanged.
 Written by: P1, `native/src/rs/prism-projections/src/semantic_index.rs`. Stage: parse.
 
 This is a parity document (conventions.md §4, §5, §14). Every field keeps today's name, unit, value and null-versus-absent behaviour from `prism.semantic_index_a0`, except the changes listed under "Expected divergences". The ADR §6 additions (`libraryRef`, `pinName`, `pinType`, `schematicNetName`) are marked **a1**.
@@ -85,7 +85,7 @@ Pointers are RFC 6901 with two extensions: `*` is every element of an array, `{k
 | `/nets/*/schematicRefs/*/wireUuids` | `KiCadUuid[]` | — | required; net list order, no repeats | `sis:726`, `:771-772` (km `graphical.wires`, `kdj:602-627`) | `sel:302-309`; `dcs:128`, `:143` | — |
 | `/nets/*/schematicRefs/*/labelUuids` | `KiCadUuid[]` | — | required; labels, then ports, then power ports | `sis:727-731` | `sel:302-309`; `dcs:128`, `:144` | — |
 | `/nets/*/schematicRefs/*/junctionUuids` | `KiCadUuid[]` | — | required; junctions, then sheet entries | `sis:732-735` | `dcs:128`, `:145` | — |
-| `/nets/*/schematicRefs/*/pinUuids` | `KiCadUuid[]` | — | required; terminal order, no repeats | `sis:1008-1021` | `sel:302-309`; `dcs:128`, `:146` | — |
+| `/nets/*/schematicRefs/*/pinUuids` | `SemanticIndexPinId[]` | — | required; terminal order, no repeats | `sis:1008-1021` | `sel:302-309`; `dcs:128`, `:146` | — |
 | `/nets/*/schematicRefs/*/labelInstanceCount` | `Count` | — | required | `sis:773-774`, `:776-777` | `dcs:118` | — |
 | `/nets/*/pcbRefs` | `SemanticIndexNetPcbRef[]` | — | required; exactly one entry | `sis:950`, `:1055` | `nh:63-64` | — |
 | `/nets/*/pcbRefs/*/trackUuids` | `KiCadUuid[]` | — | required; board file order | `sis:1113-1127` | `nh:64` | D4 |
@@ -110,7 +110,7 @@ Pointers are RFC 6901 with two extensions: `*` is every element of an array, `{k
 | `/terminals/*/netUid` | `SemanticIndexNetUid` \| null | — | required; null = board-only terminal whose pad has no net | `sis:999`, `:1096`, `:1109`; `sin:161` | `dcs:68`, `:82`, `:275-277` | — |
 | `/terminals/*/netName` | `NetName` \| null | — | required; null as `netUid` | `sis:1000`, `:1097`, `:1109`; `sin:162` | `bf:46` (pad net); `pst:120` | pad-resolved, unchanged from a0 |
 | `/terminals/*/schematicNetName` **a1** | `NetName` | — | optional: present on every terminal the netlist pass created | new: the `name` of the netlist net at `sis:930` that lists the terminal, recorded before `sis:1109` and `sin:158-162` rewrite `netName` | C2 (schematic-side connectivity, today from an index built with `include_pcb=False`, `design_compare_service.py:416-427`) | new (D7) |
-| `/terminals/*/schematicPinUuid` | `KiCadUuid` | — | optional: present on netlist-pass terminals | `sis:993`, `:1001` | `sel:256`; `dcs:202`, `:275-276` | — |
+| `/terminals/*/schematicPinUuid` | `SemanticIndexPinId` | — | optional: present on netlist-pass terminals | `sis:993`, `:1001` | `sel:256`; `dcs:202`, `:275-276` | — |
 | `/terminals/*/pcbPadUuid` | `KiCadUuid` | — | optional: present when a pad with this reference and number exists | `sis:1098`, `:1106` | `sel:256`; `dcs:277`; `bf:44` (only pad terminals are board facts) | D4 |
 
 ### `sheetInstances`

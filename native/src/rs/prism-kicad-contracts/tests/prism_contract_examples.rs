@@ -78,6 +78,7 @@ fn every_prism_example_round_trips_through_its_generated_type() {
     );
     round_trip::<generated::prism_route_metrics_a0::RouteMetricsA0>("RouteMetricsA0");
     round_trip::<generated::prism_semantic_index_a2::SemanticIndexA2>("SemanticIndexA2");
+    round_trip::<generated::prism_semantic_index_a3::SemanticIndexA3>("SemanticIndexA3");
     round_trip::<generated::prism_stackup_a0::StackupA0>("StackupA0");
     round_trip::<generated::prism_stroke_text_request_a0::StrokeTextRequestA0>(
         "StrokeTextRequestA0",

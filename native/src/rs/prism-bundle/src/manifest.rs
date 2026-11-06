@@ -49,7 +49,7 @@ pub const PROJECTIONS: [(&str, &str); 8] = [
     ("projections/placements.json", "prism.placements.a1"),
     ("projections/project.json", "prism.project.a0"),
     ("projections/route-metrics.json", "prism.route_metrics.a0"),
-    ("projections/semantic-index.json", "prism.semantic_index.a2"),
+    ("projections/semantic-index.json", "prism.semantic_index.a3"),
     ("projections/stackup.json", "prism.stackup.a0"),
     (
         "projections/system-interface.json",

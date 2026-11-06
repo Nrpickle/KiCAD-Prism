@@ -9,7 +9,7 @@ use super::input::{Fingerprint, Pair, View, terminal_name};
 use super::pairing::{self, NetPair};
 use super::targets::{self, Buckets};
 use prism_kicad_contracts::generated::prism_design_compare_result_a1 as dc;
-use prism_kicad_contracts::generated::prism_semantic_index_a2::SemanticIndexNet;
+use prism_kicad_contracts::generated::prism_semantic_index_a3::SemanticIndexNet;
 use std::collections::BTreeSet;
 
 /// Why a net change counts, in classification order.
@@ -356,18 +356,15 @@ fn fallback_targets(
 /// (`_net_source_id`).
 fn net_source_id<'a>(view: &'a View, net: &'a SemanticIndexNet) -> Option<&'a str> {
     for reference in &net.schematic_refs {
-        let buckets = [
-            &reference.wire_uuids,
-            &reference.label_uuids,
-            &reference.pin_uuids,
-            &reference.junction_uuids,
-        ];
-        for bucket in buckets {
-            for uuid in bucket {
-                if !uuid.as_str().is_empty() {
-                    return Some(uuid.as_str());
-                }
-            }
+        let mut ids = reference
+            .wire_uuids
+            .iter()
+            .map(|id| id.as_str())
+            .chain(reference.label_uuids.iter().map(|id| id.as_str()))
+            .chain(reference.pin_uuids.iter().map(|id| id.as_str()))
+            .chain(reference.junction_uuids.iter().map(|id| id.as_str()));
+        if let Some(id) = ids.find(|id| !id.is_empty()) {
+            return Some(id);
         }
     }
     for &index in &view.terminals {

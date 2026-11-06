@@ -194,7 +194,7 @@ pub enum Document {
     /// and the board objects).
     Json(serde_json::Value),
     /// The semantic index, typed, with its `designKey` set.
-    SemanticIndex(Box<prism_kicad_contracts::generated::prism_semantic_index_a2::SemanticIndexA2>),
+    SemanticIndex(Box<prism_kicad_contracts::generated::prism_semantic_index_a3::SemanticIndexA3>),
     /// The board objects, typed.
     BoardObjects(Box<prism_kicad_contracts::generated::prism_board_objects_a0::BoardObjectsA0>),
 }

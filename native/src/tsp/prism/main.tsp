@@ -18,6 +18,7 @@ import "./project-a0.tsp";
 import "./revision-key-a1.tsp";
 import "./route-metrics-a0.tsp";
 import "./semantic-index-a2.tsp";
+import "./semantic-index-a3.tsp";
 import "./stackup-a0.tsp";
 import "./stroke-text-a0.tsp";
 import "./system-interface-v1.tsp";

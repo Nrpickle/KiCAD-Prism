@@ -2,7 +2,7 @@
 
 use super::split;
 use crate::semantic_index::stable_uid;
-use prism_kicad_contracts::generated::prism_semantic_index_a2::SemanticIndexA2;
+use prism_kicad_contracts::generated::prism_semantic_index_a3::SemanticIndexA3;
 use serde_json::{Value, json};
 
 fn reference(pins: &[&str]) -> Value {
@@ -30,9 +30,9 @@ fn terminal(reference: &str, schematic_name: &str, board_name: &str, pin: &str) 
     })
 }
 
-fn index(nets: Value, terminals: Value) -> SemanticIndexA2 {
+fn index(nets: Value, terminals: Value) -> SemanticIndexA3 {
     serde_json::from_value(json!({
-        "schema": "prism.semantic_index.a2", "designKey": "0".repeat(64),
+        "schema": "prism.semantic_index.a3", "designKey": "0".repeat(64),
         "components": [], "nets": nets, "terminals": terminals, "sheetInstances": [], "buses": [],
         "indexes": {
             "componentByReference": {}, "componentBySchematicUuid": {},
@@ -51,7 +51,7 @@ fn index(nets: Value, terminals: Value) -> SemanticIndexA2 {
 }
 
 /// `(name, uid, aliases, the first pin of each ref)` per net.
-fn shape(index: &SemanticIndexA2) -> Vec<(String, String, Vec<String>, Vec<String>)> {
+fn shape(index: &SemanticIndexA3) -> Vec<(String, String, Vec<String>, Vec<String>)> {
     index
         .nets
         .iter()

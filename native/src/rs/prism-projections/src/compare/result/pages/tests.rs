@@ -2,14 +2,14 @@
 
 use super::members;
 use prism_kicad_contracts::generated::prism_occurrences_a0::OccurrencesA0;
-use prism_kicad_contracts::generated::prism_semantic_index_a2::{
-    SemanticIndexA2, SemanticIndexBus,
+use prism_kicad_contracts::generated::prism_semantic_index_a3::{
+    SemanticIndexA3, SemanticIndexBus,
 };
 use serde_json::json;
 
-fn index(page: &str, parent: &str) -> SemanticIndexA2 {
+fn index(page: &str, parent: &str) -> SemanticIndexA3 {
     serde_json::from_value(json!({
-        "schema": "prism.semantic_index.a2",
+        "schema": "prism.semantic_index.a3",
         "designKey": "0".repeat(64),
         "components": [{
             "componentUid": "cmp:R1", "reference": "R1", "value": "10k", "footprint": "", "libraryRef": "Device:R",
@@ -72,7 +72,7 @@ fn occurrences(page: &str) -> OccurrencesA0 {
 }
 
 /// Every path the test documents carry, in a fixed order.
-fn paths(index: &SemanticIndexA2, occurrences: &OccurrencesA0) -> Vec<String> {
+fn paths(index: &SemanticIndexA3, occurrences: &OccurrencesA0) -> Vec<String> {
     let mut out = vec![index.components[0].schematic_refs[0].page.clone()];
     out.extend(
         index.nets[0]

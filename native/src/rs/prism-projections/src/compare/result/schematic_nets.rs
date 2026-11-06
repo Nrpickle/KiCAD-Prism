@@ -22,13 +22,13 @@
 //!   `stable_uid("net", [name])` as its uid, as the schematic-only index has.
 
 use crate::semantic_index::stable_uid;
-use prism_kicad_contracts::generated::prism_semantic_index_a2::{
-    NetName, SemanticIndexA2, SemanticIndexNet, SemanticIndexNetSchematicRef, SemanticIndexNetUid,
+use prism_kicad_contracts::generated::prism_semantic_index_a3::{
+    NetName, SemanticIndexA3, SemanticIndexNet, SemanticIndexNetSchematicRef, SemanticIndexNetUid,
 };
 use std::collections::{HashMap, HashSet};
 
 /// Replace every merged board net of `index` by the schematic nets it absorbed.
-pub(super) fn split(index: &mut SemanticIndexA2) {
+pub(super) fn split(index: &mut SemanticIndexA3) {
     let names: HashSet<String> = index
         .terminals
         .iter()

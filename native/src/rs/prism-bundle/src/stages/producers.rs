@@ -1,7 +1,7 @@
 //! The parse stage's projection producers and how they run: all at once,
 //! with `design.json` built beside them (amendment C2r §2 item 8).
 //!
-//! The semantic index stays typed (`SemanticIndexA2`) until every producer
+//! The semantic index stays typed (`SemanticIndexA3`) until every producer
 //! has finished: its `designKey` covers the whole read set, so stage parse
 //! sets the field and serializes the member once, after the run
 //! (bundle-format.md §2.3).
@@ -17,7 +17,7 @@ use super::design;
 use super::parse::Design;
 use crate::manifest::{DESIGN_PATH, PROJECTIONS, json_bytes};
 use prism_kicad_contracts::generated::prism_board_objects_a0::BoardObjectsA0;
-use prism_kicad_contracts::generated::prism_semantic_index_a2::SemanticIndexA2;
+use prism_kicad_contracts::generated::prism_semantic_index_a3::SemanticIndexA3;
 use prism_projections::Produced;
 use serde_json::Value;
 
@@ -33,7 +33,7 @@ pub(super) enum ProjectionResult {
     /// The semantic index, still typed.
     SemanticIndex {
         /// The document; stage parse sets `designKey` before serializing it.
-        document: Box<SemanticIndexA2>,
+        document: Box<SemanticIndexA3>,
         /// Its recorded warnings.
         warnings: Vec<prism_projections::ProducerWarning>,
     },
@@ -95,7 +95,7 @@ type Producer =
 type SemanticProducer = fn(
     &prism_projections::ProjectionInput<'_>,
 )
-    -> Result<Produced<SemanticIndexA2>, prism_projections::ProjectionError>;
+    -> Result<Produced<SemanticIndexA3>, prism_projections::ProjectionError>;
 
 type BoardObjectsProducer =
     fn(
@@ -132,7 +132,7 @@ fn produced<T: serde::Serialize>(
 }
 
 fn semantic(
-    result: Result<Produced<SemanticIndexA2>, prism_projections::ProjectionError>,
+    result: Result<Produced<SemanticIndexA3>, prism_projections::ProjectionError>,
 ) -> Result<ProjectionResult, String> {
     let produced = result.map_err(|error| error.message)?;
     Ok(ProjectionResult::SemanticIndex {
@@ -194,7 +194,7 @@ fn route_metrics(
 
 fn semantic_index(
     input: &prism_projections::ProjectionInput<'_>,
-) -> Result<Produced<SemanticIndexA2>, prism_projections::ProjectionError> {
+) -> Result<Produced<SemanticIndexA3>, prism_projections::ProjectionError> {
     prism_projections::semantic_index::produce(input)
 }
 

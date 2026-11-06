@@ -1,5 +1,5 @@
 //! The manifest's read set (bundle-format.md §2.3): canonical order (I13),
-//! the design key it feeds (`prism.semantic_index.a2` `designKey`), and the
+//! the design key it feeds (`prism.semantic_index.a3` `designKey`), and the
 //! check against the build's own key record that stage parse performs before
 //! it writes the archive (I14, cli-spec.md §5.10 conditions 4–7).
 //!

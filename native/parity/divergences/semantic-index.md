@@ -1,20 +1,20 @@
 # Divergences: semantic-index
 
-- Member: `projections/semantic-index.json`, schema `prism.semantic_index.a2` (root `SemanticIndexA2`)
+- Member: `projections/semantic-index.json`, schema `prism.semantic_index.a3` (root `SemanticIndexA3`)
 - Producer: P1 (`native/src/rs/prism-projections/src/semantic_index.rs`)
 - Field map: [`native/contracts/prism/field-maps/semantic-index.md`](../../contracts/prism/field-maps/semantic-index.md) ("Expected divergences" holds the full text; maintainer decisions in [`decisions.md`](../../contracts/prism/decisions.md), "Semantic index")
 - Golden: `capture/semantic_index.py` (dev's builder with the a1 additions patched in memory, then the a0 → a1 envelope), on the prepared, KiCad-upgraded sources.
 
-One runner entry, D1's a2 envelope, applies to every case: the goldens hold the a1 envelope until they are recaptured. Every other item below is either already in the golden transform, removed by the comparison, or absent from the fixtures.
+The committed semantic-index goldens use the a3 envelope and designKey. Their design values are unchanged. D1's envelope transform remains registered for historical a1/a2 goldens. Every other item below is already in the golden transform, removed by the comparison, or absent from the fixtures.
 
 ## D1. Envelope
 
 - Today: `schema: prism.semantic_index_a0`, plus `commit`, `generator` and `generatedAt`.
-- Bundle: `schema: prism.semantic_index.a2`, with no `commit`, `generator` or `generatedAt` (decisions, Semantic index 1), and `designKey` in place of a1's `sourceRevisionKey` (bundle-format.md §2.3).
+- Bundle: `schema: prism.semantic_index.a3`, with no `commit`, `generator` or `generatedAt` (decisions, Semantic index 1), and `designKey` in place of a1's `sourceRevisionKey` (bundle-format.md §2.3).
 - Why: a member is keyed by revision key, not by commit. The generator is recorded in `bundle.json`. A wall-clock time would break determinism.
 - Consumer: C1 (`frontend/src/types/prism-selection.ts` literal type, ETag); K (job details).
 - Fixtures: all 32 goldens.
-- Runner: rule `semantic-index/envelope-a2` (`divergences.py`), cases `["*"]`. The golden transform writes the a1 envelope, so until the goldens are recaptured the rule sets the golden's `schema` to a2 and moves its `sourceRevisionKey` to `designKey`, as an a2 producer writes it. The key's value is non-semantic under either name (`members.py`).
+- Runner: rule `semantic-index/envelope-a3` (`divergences.py`), cases `["*"]`. The golden transform writes the a1 envelope, so until the goldens are recaptured the rule sets the golden's `schema` to a3 and moves its `sourceRevisionKey` to `designKey`, as an a3 producer writes it. The key's value is non-semantic under either name (`members.py`).
 
 ## D2. Revision key
 
@@ -119,3 +119,10 @@ One runner entry, D1's a2 envelope, applies to every case: the goldens hold the 
   - an order-dependent hierarchical rename after the global merge.
 - Consumer: every reader of the schematic nets (`design.json`, the semantic index, occurrences, system interface).
 - Fixtures: `prism-kicad-core/tests/schematic_kicad_connectivity.rs`, `schematic_connectivity.rs` and `schematic_kicad_forms.rs` pin each rule with a synthetic design. `crate_version` 0.12.0.
+
+## P1. Missing saved pin UUIDs
+
+a3 accepts the renderer fallback `<symbolUuid>__pin__<token>` in `pinUuids`
+and `schematicPinUuid`. The values were already emitted; the new schema
+corrects their validation. Other UUID fields remain strict. The new
+`pin_ids` CLI regression covers this case, which the old goldens omit.

@@ -57,6 +57,7 @@ pub mod prism_revision_key_record_a1;
 pub mod prism_revision_key_vectors_a1;
 pub mod prism_route_metrics_a0;
 pub mod prism_semantic_index_a2;
+pub mod prism_semantic_index_a3;
 pub mod prism_stackup_a0;
 pub mod prism_stroke_text_request_a0;
 pub mod prism_system_interface_v1;

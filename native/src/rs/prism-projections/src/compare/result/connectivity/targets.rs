@@ -4,7 +4,7 @@
 
 use super::super::{VisualRole, VisualSide, VisualStatus, VisualTarget};
 use super::input::{Pair, View};
-use prism_kicad_contracts::generated::prism_semantic_index_a2::SemanticIndexNet;
+use prism_kicad_contracts::generated::prism_semantic_index_a3::SemanticIndexNet;
 use std::collections::HashMap;
 
 /// Which of a net's buckets become targets (`_net_bucket_targets`'s `buckets`).
@@ -44,23 +44,33 @@ pub(super) fn net_bucket_targets(
                 .as_ref()
                 .map(|path| path.as_str()),
         );
-        let buckets_of = [
-            (&reference.wire_uuids, VisualRole::Wire),
-            (&reference.label_uuids, VisualRole::Label),
-            (&reference.junction_uuids, VisualRole::Junction),
-            (&reference.pin_uuids, VisualRole::Terminal),
-        ];
-        for (uuids, role) in buckets_of {
-            if !buckets.includes(role) {
+        let ids = reference
+            .wire_uuids
+            .iter()
+            .map(|id| (id.as_str(), VisualRole::Wire))
+            .chain(
+                reference
+                    .label_uuids
+                    .iter()
+                    .map(|id| (id.as_str(), VisualRole::Label)),
+            )
+            .chain(
+                reference
+                    .junction_uuids
+                    .iter()
+                    .map(|id| (id.as_str(), VisualRole::Junction)),
+            )
+            .chain(
+                reference
+                    .pin_uuids
+                    .iter()
+                    .map(|id| (id.as_str(), VisualRole::Terminal)),
+            );
+        for (source_id, role) in ids {
+            if !buckets.includes(role) || source_id.is_empty() {
                 continue;
             }
-            for uuid in uuids {
-                let source_id = uuid.as_str();
-                if source_id.is_empty() {
-                    continue;
-                }
-                targets.push(target(side, status, source_id, page, sheet_path, role));
-            }
+            targets.push(target(side, status, source_id, page, sheet_path, role));
         }
     }
     targets

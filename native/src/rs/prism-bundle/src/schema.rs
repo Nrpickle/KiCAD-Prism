@@ -1,6 +1,6 @@
 //! JSON Schema validation against the Prism contracts.
 //!
-//! The 33 Prism roots in `native/contracts/generated/schema/` are compiled
+//! The 34 Prism roots in `native/contracts/generated/schema/` are compiled
 //! from TypeSpec and committed. This crate carries a byte-identical copy in
 //! `schema/` (a test checks it against the committed files), because the
 //! worker image builds `prism-kicad` from `native/src/rs` alone. Every schema
@@ -22,7 +22,7 @@ use std::collections::BTreeMap;
 use std::sync::OnceLock;
 
 /// The committed Prism schemas, `(file name, text)`.
-pub const SCHEMA_FILES: [(&str, &str); 33] = [
+pub const SCHEMA_FILES: [(&str, &str); 34] = [
     (
         "ArtworkConfigA0.json",
         include_str!("../schema/ArtworkConfigA0.json"),
@@ -132,6 +132,10 @@ pub const SCHEMA_FILES: [(&str, &str); 33] = [
     (
         "SemanticIndexA2.json",
         include_str!("../schema/SemanticIndexA2.json"),
+    ),
+    (
+        "SemanticIndexA3.json",
+        include_str!("../schema/SemanticIndexA3.json"),
     ),
     ("StackupA0.json", include_str!("../schema/StackupA0.json")),
     (
@@ -890,7 +894,7 @@ mod tests {
                 .unwrap_or_else(|error| panic!("{}: {error:?}", path.display()));
             checked += 1;
         }
-        assert_eq!(checked, 33);
+        assert_eq!(checked, 34);
     }
 
     #[test]

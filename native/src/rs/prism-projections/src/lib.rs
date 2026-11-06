@@ -15,7 +15,7 @@
 //!
 //! | Module | Member | `Root` (generated in `prism-kicad-contracts`) | WP |
 //! |---|---|---|---|
-//! | [`semantic_index`] | `projections/semantic-index.json` | `prism_semantic_index_a2::SemanticIndexA2` | P1 |
+//! | [`semantic_index`] | `projections/semantic-index.json` | `prism_semantic_index_a3::SemanticIndexA3` | P1 |
 //! | [`board_objects`] | `projections/board-objects.json` | `prism_board_objects_a0::BoardObjectsA0` | P2 |
 //! | [`occurrences`] | `projections/occurrences.json` | `prism_occurrences_a0::OccurrencesA0` | P2 |
 //! | [`route_metrics`] | `projections/route-metrics.json` | `prism_route_metrics_a0::RouteMetricsA0` | P2 |

@@ -78,7 +78,7 @@ Known issue for F1 and L:
 | Bundle member | Schema id | Root model | Contract | Example | Field map | Producer | Consumers |
 |---|---|---|---|---|---|---|---|
 | `bundle.json` | `prism.bundle.manifest.a3` | `BundleManifestA3` | [`bundle-manifest-a3.tsp`](../../src/tsp/prism/bundle-manifest-a3.tsp) | [example](examples/BundleManifestA3.example.json) | [bundle-manifest](field-maps/bundle-manifest.md) | B | all |
-| `projections/semantic-index.json` | `prism.semantic_index.a2` | `SemanticIndexA2` | [`semantic-index-a2.tsp`](../../src/tsp/prism/semantic-index-a2.tsp) | [example](examples/SemanticIndexA2.example.json) | [semantic-index](field-maps/semantic-index.md) | P1 | C1, C3, C6 |
+| `projections/semantic-index.json` | `prism.semantic_index.a3` | `SemanticIndexA3` | [`semantic-index-a3.tsp`](../../src/tsp/prism/semantic-index-a3.tsp) | [example](examples/SemanticIndexA3.example.json) | [semantic-index](field-maps/semantic-index.md) | P1 | C1, C3, C6 |
 | `projections/board-objects.json` | `prism.board_objects.a0` | `BoardObjectsA0` | [`board-objects-a0.tsp`](../../src/tsp/prism/board-objects-a0.tsp) | [example](examples/BoardObjectsA0.example.json) | [board-objects](field-maps/board-objects.md) | P2 | C2 |
 | `projections/occurrences.json` | `prism.occurrences.a0` | `OccurrencesA0` | [`occurrences-a0.tsp`](../../src/tsp/prism/occurrences-a0.tsp) | [example](examples/OccurrencesA0.example.json) | [occurrences](field-maps/occurrences.md) | P2 | C2, C3, C4a, C7 |
 | `projections/stackup.json` | `prism.stackup.a0` | `StackupA0` | [`stackup-a0.tsp`](../../src/tsp/prism/stackup-a0.tsp) | [example](examples/StackupA0.example.json) | [stackup](field-maps/stackup.md) | P3 | C2, C3, C4b, C5, C6 |
@@ -101,3 +101,5 @@ Specs and records:
 - [`decisions.md`](decisions.md): every maintainer decision taken in the W0 review.
 
 `node scripts/contracts/build.mjs` compiles `tsp/prism/main.tsp`, writes `contracts/generated/schema/` (19 Prism roots, beside the fork's) and validates all 19 examples. `node scripts/contracts/check-contract.mjs src/tsp/prism/revision-key-a1.tsp --json contracts/prism/revision-key-vectors.json --model RevisionKeyVectorsA1` validates the vectors.
+
+The frozen a2 semantic-index contract remains registered for stored bundles. See [amendment P1](../../../docs/architecture/adr-native-design-bundle-amendment-p1.md) for a3 pin identities.

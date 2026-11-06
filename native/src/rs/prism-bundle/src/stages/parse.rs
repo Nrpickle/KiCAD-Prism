@@ -30,7 +30,7 @@ use crate::paths::{file_name, is_within, join, parent};
 use crate::revision_key::{EffectiveConfig, default_config};
 use prism_kicad_contracts::generated::prism_revision_key_effective_config_a1 as cfg;
 use prism_kicad_contracts::generated::prism_revision_key_record_a1 as rk;
-use prism_kicad_contracts::generated::prism_semantic_index_a2::SemanticIndexA2;
+use prism_kicad_contracts::generated::prism_semantic_index_a3::SemanticIndexA3;
 use prism_kicad_core::sheet_file::{self, Unresolved};
 use prism_kicad_core::{PcbLimits, PcbView, ProjectDocument, ProjectLimits};
 use serde_json::Value;
@@ -277,7 +277,7 @@ struct ParseRun<'a> {
     derived: Vec<MemberData>,
     /// The semantic index, typed, until the read set is final and its
     /// `designKey` can be set (bundle-format.md §2.3).
-    pending_index: Option<Box<SemanticIndexA2>>,
+    pending_index: Option<Box<SemanticIndexA3>>,
     /// An in-memory parse's projections (`ParseRequest::in_memory`).
     documents: BTreeMap<String, Document>,
     /// The 3D models the key lists but the worker could not materialize
@@ -962,7 +962,7 @@ impl ParseRun<'_> {
             index.design_key = design_key.into();
             self.keep(
                 "projections/semantic-index.json",
-                "prism.semantic_index.a2",
+                "prism.semantic_index.a3",
                 Document::SemanticIndex(index),
             )?;
         }

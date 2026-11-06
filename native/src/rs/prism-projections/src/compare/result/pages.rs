@@ -8,8 +8,8 @@
 use super::super::entry::{anchor_directory, strip_directory};
 use super::Revision;
 use prism_kicad_contracts::generated::prism_occurrences_a0::OccurrencesA0;
-use prism_kicad_contracts::generated::prism_semantic_index_a2::{
-    SemanticIndexA2, SemanticIndexBus,
+use prism_kicad_contracts::generated::prism_semantic_index_a3::{
+    SemanticIndexA3, SemanticIndexBus,
 };
 
 /// Make every document path `compare` reads from `revision`'s semantic index
@@ -23,7 +23,7 @@ pub(super) fn relative(revision: &mut Revision) {
 }
 
 /// [`relative`] on the two members, for `project_file` (`config.project_file`).
-fn members(project_file: &str, index: &mut SemanticIndexA2, occurrences: &mut OccurrencesA0) {
+fn members(project_file: &str, index: &mut SemanticIndexA3, occurrences: &mut OccurrencesA0) {
     let directory = anchor_directory(project_file);
     if directory.is_empty() {
         return;
@@ -34,7 +34,7 @@ fn members(project_file: &str, index: &mut SemanticIndexA2, occurrences: &mut Oc
 }
 
 /// The semantic index's pages: net and component refs, sheet instances, buses.
-fn semantic_pages(index: &mut SemanticIndexA2, strip: &impl Fn(&mut String)) {
+fn semantic_pages(index: &mut SemanticIndexA3, strip: &impl Fn(&mut String)) {
     for net in &mut index.nets {
         for page in net
             .schematic_refs

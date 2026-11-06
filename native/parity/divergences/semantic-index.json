@@ -4,9 +4,9 @@
  "accepted": [
   {
    "id": "D1",
-   "summary": "The bundle writes the a2 envelope (schema prism.semantic_index.a2, designKey); the goldens hold the a1 envelope until they are recaptured.",
+   "summary": "The bundle writes the a3 envelope (schema prism.semantic_index.a3, designKey; pin IDs per amendment P1); the envelope transform also accepts historical a1/a2 goldens.",
    "cases": ["*"],
-   "rule": "semantic-index/envelope-a2"
+   "rule": "semantic-index/envelope-a3"
   }
  ]
 }
