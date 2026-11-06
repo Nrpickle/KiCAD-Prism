@@ -59,7 +59,7 @@ VERSION = {
         },
         {
             "path": "projections/semantic-index.json",
-            "schema": "prism.semantic_index.a2",
+            "schema": "prism.semantic_index.a3",
         },
         {"path": "projections/stackup.json", "schema": "prism.stackup.a0"},
         {

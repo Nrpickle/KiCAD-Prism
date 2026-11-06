@@ -52,7 +52,7 @@
       },
       {
         "path": "projections/semantic-index.json",
-        "schema": "prism.semantic_index.a2"
+        "schema": "prism.semantic_index.a3"
       },
       {
         "path": "projections/stackup.json",
@@ -69,7 +69,7 @@
     "upgrade_procedure": "kicad-seeded-upgrade-a0"
   },
   "revision_key": "faea5ace66f591553c21fdcb2555e5a67e6e2fe73b7d17663375ac6f809206f5",
-  "bundle_key": "f21ae403857908e6b3058eef04b526d4c84068414b2dfaf3b972ebb8e524ca06",
+  "bundle_key": "f0062218525eb4b411288e75653e63ff48e682cf99a1ecefca01a98ab87b8668",
   "config": {
     "schema": "prism.revision_key.effective_config.a1",
     "project_file": "USB-PD-Trigger-Board.kicad_pro",
@@ -212,7 +212,7 @@
       "stage": "parse",
       "sha256": "dfb3b7986d827b37b8367ab797cf444f16d8c9f2a6f922976d2f156ec53c5844",
       "bytes": 16611,
-      "member_schema": "prism.semantic_index.a2"
+      "member_schema": "prism.semantic_index.a3"
     },
     {
       "path": "projections/stackup.json",

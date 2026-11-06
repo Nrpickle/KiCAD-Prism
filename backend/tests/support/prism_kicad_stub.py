@@ -39,7 +39,7 @@ PROJECTIONS = {
     "projections/placements.json": "PlacementsA1",
     "projections/project.json": "ProjectA0",
     "projections/route-metrics.json": "RouteMetricsA0",
-    "projections/semantic-index.json": "SemanticIndexA2",
+    "projections/semantic-index.json": "SemanticIndexA3",
     "projections/stackup.json": "StackupA0",
     "projections/system-interface.json": "SystemInterfaceV1",
 }
